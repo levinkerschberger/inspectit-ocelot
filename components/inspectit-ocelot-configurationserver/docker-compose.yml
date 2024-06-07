@@ -1,0 +1,16 @@
+services:
+  ocelot-config-server:
+    restart: always
+    image: localhost/levin/config-server:snapshot
+    container_name: ocelot-config-server
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+    environment:
+      - INSPECTIT_CONFIG_SERVER_WORKING_DIRECTORY=/configuration-server
+      - INSPECTIT_CONFIG_SERVER_DEFAULT_USER_PASSWORD=demo
+    volumes:
+      - ./configuration-server:/configuration-server
+    ports:
+      - 8090:8090

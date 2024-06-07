@@ -7,6 +7,16 @@ It can be build by `gradle bootJar` and started by `java -jar inspectit-ocelot-c
 To use a custom logback configuration, you have to start the Configuration Server like this: `java -Dlogging.config=<PATH_TO_YOUR_LOGBACK_CONFIG> -jar inspectit-ocelot-configurationserver-X.X.X.jar`
 _Please note that Spring Boot ignores the default `-Dlogback.configurationFile` property!_
 
+If you have trouble to execute the gradle tasks, which include the tasks from the 'inspectit-ocelot-configurationserver-ui' module, then try to use your local yarn installation.
+Go to components/inspectit-ocelot-configurationserver-ui/build.gradle and change the following line:
+```groovy
+download = true
+```
+to
+```groovy
+download = false
+```
+
 It is used to manage and store agent configurations.
 The configurations can be fetched by Ocelot agents via a REST interface.
 By default, the REST interface is exposed on port 8090.

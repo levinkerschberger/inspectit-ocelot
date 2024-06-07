@@ -1,4 +1,4 @@
-name: Docker Build And Push Manual
+name: Docker Build And Push Snapshot
 
 on:
   push:
@@ -22,14 +22,12 @@ jobs:
           distribution: temurin
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
-      - name: Scan dependencies
-        run: ./gradlew dependencyCheckAggregate
       - name: Build artifacts
         run: |
-          ./gradlew assemble bootJarWithFrontend :inspectit-ocelot-core:cyclonedxBom :inspectit-ocelot-configurationserver:cyclonedxBom -PbuildVersion=${{ github.ref_name }}
+          ./gradlew assemble bootJarWithFrontend :inspectit-ocelot-core:cyclonedxBom :inspectit-ocelot-configurationserver:cyclonedxBom -PbuildVersion=snapshot
           mkdir artifacts
-          cp ./inspectit-ocelot-agent/build/inspectit-ocelot-agent-${{ github.ref_name }}.jar ./artifacts
-          cp ./components/inspectit-ocelot-configurationserver/build/libs/inspectit-ocelot-configurationserver-${{ github.ref_name }}.jar ./artifacts
+          cp ./inspectit-ocelot-agent/build/inspectit-ocelot-agent-snapshot.jar ./artifacts
+          cp ./components/inspectit-ocelot-configurationserver/build/libs/inspectit-ocelot-configurationserver-snapshot.jar ./artifacts
           mkdir boms
           cp ./inspectit-ocelot-core/build/reports/bom.json ./boms/inspectit-ocelot-agent-bom.json
           cp ./inspectit-ocelot-core/build/reports/bom.xml ./boms/inspectit-ocelot-agent-bom.xml
@@ -52,11 +50,11 @@ jobs:
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
       - name: Build Docker Images
-        run: ./gradlew dockerTag -PbuildVersion=${{ github.ref_name }}
+        run: ./gradlew dockerTag -PbuildVersion=snapshot
       - name: Push Docker Images
         run: |
           docker login -u ${{ secrets.DOCKER_HUB_USER }} -p  ${{ secrets.DOCKER_HUB_PASSWORD }}
-          docker push inspectit/inspectit-ocelot-agent:${{ github.ref_name }}
-          docker push inspectit/inspectit-ocelot-agent:latest
-          docker push inspectit/inspectit-ocelot-configurationserver:${{ github.ref_name }}
-          docker push inspectit/inspectit-ocelot-configurationserver:latest
+          docker push inspectit/inspectit-ocelot-agent:action-snapshot
+          docker push inspectit/inspectit-ocelot-agent:action-snapshot
+          docker push inspectit/inspectit-ocelot-configurationserver:action-snapshot
+          docker push inspectit/inspectit-ocelot-configurationserver:action-snapshot

@@ -1,7 +1,11 @@
 name: Build and Release
 
 on:
+  push:
+    branches:
+      - hotfix/*
   workflow_dispatch:
+
 
 jobs:
   build_and_publish_docker_images:

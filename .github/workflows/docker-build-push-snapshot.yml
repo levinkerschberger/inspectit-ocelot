@@ -34,13 +34,6 @@ jobs:
           cp ./components/inspectit-ocelot-configurationserver/build/reports/bom.json ./boms/inspectit-ocelot-configurationserver-bom.json
           cp ./components/inspectit-ocelot-configurationserver/build/reports/bom.xml ./boms/inspectit-ocelot-configurationserver-bom.xml
           zip -r ./artifacts/software-bill-of-materials.zip ./boms
-
-  docker:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
 

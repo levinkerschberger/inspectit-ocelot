@@ -129,6 +129,9 @@ tasks.register('copyServerJar', Copy) {
 docker {
     name "inspectit/inspectit-ocelot-configurationserver"
     dependsOn copyServerJar
+    
+    buildx(true)
+    platform("linux/amd64", "linux/arm64")
 
     tag 'versioned', "hub.docker.com/${name}:${version}"
     dockerfile file('docker/Dockerfile')

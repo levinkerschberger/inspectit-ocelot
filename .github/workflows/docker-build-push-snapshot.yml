@@ -51,6 +51,6 @@ jobs:
         with:
           context: ./components/inspectit-ocelot-configurationserver
           file: ./components/inspectit-ocelot-configurationserver/docker/Dockerfile
-          platforms: linux/amd64,linux/arm64
+          platforms: linux/amd64,linux/arm64,linux/arm64/v8,linux/arm64/v7
           push: true
           tags: ntlevinkerschberger/config-server:snapshot

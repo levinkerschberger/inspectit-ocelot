@@ -57,7 +57,7 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: ./components/inspectit-ocelot-configurationserver
-          file: ./docker/Dockerfile
+          file: ./components/inspectit-ocelot-configurationserver/docker/Dockerfile
           platforms: linux/amd64,linux/arm64
           push: true
           tags: ntlevinkerschberger/config-server:snapshot

@@ -10,7 +10,7 @@ on:
 jobs:
   build:
     name: 'Build'
-    runs-on: macos-13
+    runs-on: ubuntu-latest
     environment: development
     steps:
       - name: Checkout

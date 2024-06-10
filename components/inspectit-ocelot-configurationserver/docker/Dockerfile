@@ -1,4 +1,4 @@
-FROM --platform=$BUILDPLATFORM eclipse-temurin:17
+FROM --platform=$BUILDPLATFORM amazoncorretto:17
 
 WORKDIR /app
 
